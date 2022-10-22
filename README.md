@@ -1,3 +1,3 @@
-# CourseProject
+# WeHateFantasyFootball Fantasy Football Sentiment Analysis
 
-Please fork this repository and paste the github link of your fork on Microsoft CMT. Detailed instructions are on Coursera under Week 1: Course Project Overview/Week 9 Activities.
+Project Proposal: https://github.com/gerber55555/WeHateFantasyFootball/blob/f5eb44068b4e442189af47eea36f85900a060a2a/WeHateFantasyFootball%20Project%20Proposal.pdf 
