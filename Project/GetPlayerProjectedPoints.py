@@ -4,9 +4,9 @@ import pandas as pd
 
 
 def __get_player_stats(player, week):
-    if player.stats is not None and player.stats.get(week - 1) is not None \
-            and player.stats.get(week - 1).get('points') is not None:
-        return player.stats.get(week - 1).get('points')
+    if player.stats is not None and player.stats.get(week) is not None \
+            and player.stats.get(week).get('points') is not None:
+        return player.stats.get(week).get('points')
     return 0
 
 

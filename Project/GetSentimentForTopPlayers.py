@@ -41,16 +41,16 @@ def __setup_logging_for_psaw():
 
 
 # Get top `number_of_players` by projected points
-def get_top_players(number_of_players):
-    players = get_players_stats()
+def get_top_players(number_of_players, week):
+    players = get_players_stats(week)
     players = players.sort_values('Projected Points', ascending=False)
     players = players.head(number_of_players)
     players = players.set_index('Full Name')
     return players
 
 
-week_1_monday = datetime(2022, 9, 5)
-week_1_thursday = datetime(2022, 9, 8)
+week_1_sunday = datetime(2022, 9, 4)
+week_1_saturday = datetime(2022, 9, 10)
 
 
 def get_sentiment_for_top_players(number_of_players, week, file_name=None):
@@ -58,26 +58,28 @@ def get_sentiment_for_top_players(number_of_players, week, file_name=None):
         file_name = f"{week}.csv"
     sia = setup_sentiment_analysis_model()
     api = setup_psaw()
-    players = get_top_players(number_of_players)
+    players = get_top_players(number_of_players, week)
+    print(players)
 
     delta = timedelta(weeks=week - 1)
-    start_epoch = int((week_1_monday + delta).timestamp())
-    end_epoch = int((week_1_thursday + delta).timestamp())
+    start_epoch = int((week_1_sunday + delta).timestamp())
+    end_epoch = int((week_1_saturday + delta).timestamp())
 
     for name, row in players.iterrows():
         for comment in api.search_comments(q=name, subreddit='nfl', limit=1000, after=start_epoch, before=end_epoch):
             for paragraph in comment.body.split('\n'):
-                if name in paragraph:
+                if name.lower() in paragraph.lower():
                     for sentence in sent_tokenize(paragraph):
-                        score = sia.polarity_scores(sentence)['compound']
-                        if score < players.loc[name, "Most Negative Comment Score"]:
-                            players.loc[name, "Most Negative Comment Score"] = score
-                            players.loc[name, "Most Negative Comment"] = sentence
-                        if score > players.loc[name, "Most Positive Comment Score"]:
-                            players.loc[name, "Most Positive Comment Score"] = score
-                            players.loc[name, "Most Positive Comment"] = sentence
-                        players.loc[name, "Sentiment"] += score
-                        players.loc[name, "NumOfDataPoints"] += 1
+                        if name.lower() in sentence.lower():
+                            score = sia.polarity_scores(sentence)['compound']
+                            if score < players.loc[name, "Most Negative Comment Score"]:
+                                players.loc[name, "Most Negative Comment Score"] = score
+                                players.loc[name, "Most Negative Comment"] = sentence
+                            if score > players.loc[name, "Most Positive Comment Score"]:
+                                players.loc[name, "Most Positive Comment Score"] = score
+                                players.loc[name, "Most Positive Comment"] = sentence
+                            players.loc[name, "Sentiment"] += score
+                            players.loc[name, "NumOfDataPoints"] += 1
 
     for name, row in players.iterrows():
         if row["NumOfDataPoints"] > 0:
@@ -101,4 +103,5 @@ if __name__ == '__main__':
         print(f"Expected maximum of 3 arguments but got {sys.argv}")
         exit(-1)
 
+    print(f"Fetching sentiment with parameters: {number_of_players=}, {week=}, {file_name=}")
     get_sentiment_for_top_players(number_of_players, week, file_name)
