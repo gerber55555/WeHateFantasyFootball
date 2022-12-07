@@ -30,7 +30,7 @@ def setup_psaw():
     __setup_logging_for_psaw()
     return api
 
-
+# Add logging to psaw so we can see queries being made in real-time
 def __setup_logging_for_psaw():
     handler = logging.StreamHandler()
     handler.setLevel(logging.INFO)
@@ -53,13 +53,13 @@ week_1_sunday = datetime(2022, 9, 4)
 week_1_saturday = datetime(2022, 9, 10)
 
 
+# Save the sentiment for the top `number_of_players` in reddit for the specified NFL week
 def get_sentiment_for_top_players(number_of_players, week, file_name=None):
     if file_name is None:
         file_name = f"{week}.csv"
     sia = setup_sentiment_analysis_model()
     api = setup_psaw()
     players = get_top_players(number_of_players, week)
-    print(players)
 
     delta = timedelta(weeks=week - 1)
     start_epoch = int((week_1_sunday + delta).timestamp())
@@ -84,7 +84,6 @@ def get_sentiment_for_top_players(number_of_players, week, file_name=None):
     for name, row in players.iterrows():
         if row["NumOfDataPoints"] > 0:
             row["Average Sentiment"] = row["Sentiment"]/row["NumOfDataPoints"]
-
 
     players.to_csv(Path(file_name))
 
