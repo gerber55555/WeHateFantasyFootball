@@ -1,7 +1,6 @@
 import os
 import pandas as pd
 import numpy as np
-import sys
 from sklearn.model_selection import train_test_split
 from sklearn.linear_model import LinearRegression
 import statsmodels.api as sm
@@ -84,9 +83,6 @@ if __name__ == '__main__':
     parser.add_argument('-lb', '--look-back', dest="lb", default=False, action="store_true",
                         help="Look back one week and regress on last weeks score")
     args = parser.parse_args()
-    # print(args)
-    # pd.set_option('display.max_columns', None)
-    # np.set_printoptions(threshold=sys.maxsize)
     weekly_data = read_sentiment_files(args.dir)
     preprocessed_data = preprocess_and_concat_data(weekly_data, args.position, args.lb)
     regress(preprocessed_data)
