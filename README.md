@@ -9,6 +9,10 @@ This project attempts to measure the fan sentiment of NFL players and see how we
 # Team Member Contributions
 * Ido Tamir (itamir2@illinois.edu): Wrote the code to calculate and analyze the sentiment for comments on reddit for each player.
 * Christian Gerber (cgerber3@illinois.edu): Wrote the code to fetch player data from ESPN, setup reddit API, and created the web interface.
+
+# Code Demo
+https://www.youtube.com/watch?v=A6b-or4sCqk
+
 # Architecture
 ```mermaid
 classDiagram
@@ -32,8 +36,6 @@ config : string client_secret
 GetPlayerProjectedPoints : get_players_stats(int week)
 GetSentimentForTopPlayers : get_sentiment_for_top_players(int number_of_players, int week, string file_name)
 ```
-# Code Demo
-https://www.youtube.com/watch?v=A6b-or4sCqk
 # Code Documentation
 
 ## Pulling the Repo 
