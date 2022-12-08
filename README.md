@@ -33,8 +33,24 @@ GetPlayerProjectedPoints : get_players_stats(int week)
 GetSentimentForTopPlayers : get_sentiment_for_top_players(int number_of_players, int week, string file_name)
 ```
 # Code Documentation
+
+## Pulling the Repo 
+
+The first step of getting the code to run is cloning the repo
+```
+git clone https://github.com/gerber55555/WeHateFantasyFootball.git
+```
+
+Then navigate to the project directory to go from there
+```
+cd WeHateFantasyFootball
+```
+
 ## Installation of Python Project
-First install all the dependencies in the requirements file
+
+If you don't have Python installed. Install it here:  https://www.python.org/downloads/
+
+Then install all the dependencies in the requirements file
 ```
  pip install -r Project/requirements.txt
 ```
@@ -113,7 +129,7 @@ Carefully read the message displayed after executing the command and follow the 
 
 Then to install the dependencies run
 ```
-cd WeHateFantasyFootballWebInterface
+cd Project\WeHateFantasyFootballWebInterface
 npm install
 ```
 This will install the necessary dependencies for the web project. There is only one, Angular Materials
