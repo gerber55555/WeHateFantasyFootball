@@ -21,6 +21,18 @@
     <td mat-cell *matCellDef="let element"> {{element.position}} </td>
   </ng-container>
 
+  <!-- Num of Data Points Column -->
+  <ng-container matColumnDef="numOfDataPoints">
+    <th mat-header-cell *matHeaderCellDef> # Of Data Points </th>
+    <td mat-cell *matCellDef="let element"> {{element.numOfDataPoints}} </td>
+  </ng-container>
+
+  <!-- Actual Points Column -->
+  <ng-container matColumnDef="actualPoints">
+    <th mat-header-cell *matHeaderCellDef> Actual Points </th>
+    <td mat-cell *matCellDef="let element"> {{element.actualPoints}} </td>
+  </ng-container>
+
   <!-- Projected Points Column -->
   <ng-container matColumnDef="projectedPoints">
     <th mat-header-cell *matHeaderCellDef> Projected Points </th>
@@ -45,6 +57,18 @@
     <td mat-cell *matCellDef="let element"> {{element.mostNegativeComment}} </td>
   </ng-container>
 
-  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+  <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
   <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
 </table>
+
+<mat-paginator #paginator
+    class="paginator"
+    (page)="handlePageEvent($event)"
+    [length]="11"
+    [pageSize]="1"
+    [disabled]="false"
+    [showFirstLastButtons]="false"
+    [hidePageSize]="true"
+    [pageIndex]="pageIndex"
+    aria-label="Select page">
+</mat-paginator>

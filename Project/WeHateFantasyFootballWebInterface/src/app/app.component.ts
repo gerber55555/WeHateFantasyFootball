@@ -1,6 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { HttpClient } from "@angular/common/http";
 import { concatMap, map, Observable } from 'rxjs';
+import { PageEvent } from '@angular/material/paginator';
 
 export interface SentimentData {
   image: string;
@@ -21,7 +22,9 @@ export interface SentimentData {
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
-export class AppComponent{
+export class AppComponent {
+
+  pageIndex: number = 0;
 
   playerDataAndNames$: Observable<Map<string, string>>;
   currentlyDisplayedTable$: Observable<SentimentData[]> = this.http.get('assets/1.csv', {responseType: 'text'}).pipe(
@@ -29,7 +32,9 @@ export class AppComponent{
       return this.convertSentimentCsvToObject(data);
     })
   );
+
   constructor(private http: HttpClient) {
+    // Map for getting Player ID for the headshot
     this.playerDataAndNames$ = this.http.get('assets/playersNamesAndIds.csv', {responseType: 'text'}).pipe(
       map(data => {
           let csvToArray: string[] = data.split("\n");
@@ -67,7 +72,9 @@ export class AppComponent{
               position: rowData[11],
               actualPoints: rowData[12]
             }
-            sentimentData.push(data);
+            if (data.image) {
+              sentimentData.push(data);
+            }
           } else {
             skipFirstRow = false;
           }
@@ -76,13 +83,17 @@ export class AppComponent{
         return sentimentData
       })
     );
+  }
 
-
-    
-
-
+  handlePageEvent(e: PageEvent) {
+    this.pageIndex = e.pageIndex;
+    this.currentlyDisplayedTable$ = this.http.get(`assets/${this.pageIndex+1}.csv`, {responseType: 'text'}).pipe(
+      concatMap(data => {
+        return this.convertSentimentCsvToObject(data);
+      })
+    );
   }
 
   title = 'WeHateFantasyFootballWebInterface';
-  displayedColumns: string[] = ['image', 'name', 'position', 'projectedPoints', 'sentiment', 'mostPositiveComment', 'mostNegativeComment'];
+  displayedColumns: string[] = ['image', 'name', 'position', 'numOfDataPoints', 'actualPoints', 'projectedPoints', 'sentiment', 'mostPositiveComment', 'mostNegativeComment'];
 }
