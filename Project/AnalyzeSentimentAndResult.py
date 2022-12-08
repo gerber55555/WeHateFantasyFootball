@@ -19,6 +19,7 @@ def read_sentiment_files(directory):
     week_to_sentiment_list = [(int(file.split('.')[0]), pd.read_csv(f"{directory}/{file}")) for file in files]
     return dict(week_to_sentiment_list)
 
+
 # Remove all empty data and calculate average sentiment
 def preprocess_data(df, position_to_filter):
     df = df[df['Actual Points'] != 0]
