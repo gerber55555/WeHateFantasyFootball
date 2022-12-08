@@ -33,10 +33,10 @@ GetPlayerProjectedPoints : get_players_stats(int week)
 GetSentimentForTopPlayers : get_sentiment_for_top_players(int number_of_players, int week, string file_name)
 ```
 # Code Documentation
-## Installation
+## Installation of Python Project
 First install all the dependencies in the requirements file
 ```
- pip install -r /path/to/requirements.txt
+ pip install -r Project/requirements.txt
 ```
 Here are the packages and what they do:
 ### Espn Fantasy Football API
@@ -95,6 +95,35 @@ https://matplotlib.org/
 
 Matplotlib is a package we use to show the results of our math
 
+## Installation of Web Project
+
+First you need to install Node.js: https://nodejs.org/en/, just install the latest stable version. The version used for this project was `v18.12.0`
+
+
+Next install the Angular CLI via the command line
+```
+npm install -g @angular/cli
+```
+
+On Windows computers the execution of PowerShell scripts is disabled by default. To allow the execution of PowerShell scripts, which is needed for npm global binaries, you must set the following
+```
+Set-ExecutionPolicy -Scope CurrentUser -ExecutionPolicy RemoteSigned
+```
+Carefully read the message displayed after executing the command and follow the instructions. Make sure you understand the implications of setting an execution policy.
+
+Then to install the dependencies run
+```
+cd WeHateFantasyFootballWebInterface
+npm install
+```
+This will install the necessary dependencies for the web project. There is only one, Angular Materials
+
+To view the web page run
+```
+ng serve --open
+```
+This will open the web page in your browser!
+
 ## How To Use
 
 ### Getting New Sentiment Data
@@ -137,4 +166,14 @@ options:
 
 Example Command:
 `python3 AnalyzeSentimentAndResult.py -dd data -p RB -lb`
-This will analyze only the data in `data` directory, that belongs to running backs and will regress on the scores from the previous week, where the input is the projected score and the sentiment  
+This will analyze only the data in `data` directory, that belongs to running backs and will regress on the scores from the previous week, where the input is the projected score and the sentiment
+
+### Using the Webpage
+
+The webpage is a nice way to view the results of the sentiment analysis. To view the players open the web page and scroll through the players
+
+The webpage shows one week at a time, if you want to change the week, use the paginator in the bottom right corner to change the week!
+
+If you want to add another week to the interface you have to drag it into the `assets` folder in the web project.
+
+Then to update the paginator, (since Angular can't read the number of files in a directory) update the `length` variable in the code to the number of weeks you have. It must be named `<number>.csv` like the rest of them 

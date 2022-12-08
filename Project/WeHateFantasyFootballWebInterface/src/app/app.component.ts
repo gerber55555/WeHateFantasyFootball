@@ -25,6 +25,7 @@ export interface SentimentData {
 export class AppComponent {
 
   pageIndex: number = 0;
+  length: number = 11;
 
   playerDataAndNames$: Observable<Map<string, string>>;
   currentlyDisplayedTable$: Observable<SentimentData[]> = this.http.get('assets/1.csv', {responseType: 'text'}).pipe(
@@ -95,5 +96,5 @@ export class AppComponent {
   }
 
   title = 'WeHateFantasyFootballWebInterface';
-  displayedColumns: string[] = ['image', 'name', 'position', 'numOfDataPoints', 'actualPoints', 'projectedPoints', 'sentiment', 'mostPositiveComment', 'mostNegativeComment'];
+  displayedColumns: string[] = ['image', 'name', 'position', 'numOfDataPoints', 'actualPoints', 'sentiment', 'mostPositiveComment', 'mostNegativeComment'];
 }
