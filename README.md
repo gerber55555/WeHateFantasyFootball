@@ -32,6 +32,8 @@ config : string client_secret
 GetPlayerProjectedPoints : get_players_stats(int week)
 GetSentimentForTopPlayers : get_sentiment_for_top_players(int number_of_players, int week, string file_name)
 ```
+# Code Demo
+https://www.youtube.com/watch?v=A6b-or4sCqk
 # Code Documentation
 
 ## Pulling the Repo 
