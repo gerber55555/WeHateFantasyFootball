@@ -10,7 +10,7 @@ This project attempts to measure the fan sentiment of NFL players and see how we
 * Ido Tamir (itamir2@illinois.edu): Wrote the code to calculate and analyze the sentiment for comments on reddit for each player.
 * Christian Gerber (cgerber3@illinois.edu): Wrote the code to fetch player data from ESPN, setup reddit API, and created the web interface.
 
-# Code Demo
+# Code Demo / Software Usage Tutorial Presentation
 https://www.youtube.com/watch?v=A6b-or4sCqk
 
 # Architecture
