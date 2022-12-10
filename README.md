@@ -196,4 +196,14 @@ The webpage shows one week at a time, if you want to change the week, use the pa
 
 If you want to add another week to the interface you have to drag it into the `assets` folder in the web project.
 
-Then to update the paginator, (since Angular can't read the number of files in a directory) update the `length` variable in the code to the number of weeks you have. It must be named `<number>.csv` like the rest of them 
+Then to update the paginator, (since Angular can't read the number of files in a directory) update the `length` variable in the code to the number of weeks you have. It must be named `<number>.csv` like the rest of them
+
+# Self Evaluation
+
+## Did we complete what we planned?
+
+Yes we believe we completed what we planned. We have the scripts for getting player data, determining the sentiment of the players, regressing and analyzing that data, and displaying that data in a web page.
+
+## Have you got the expected outcome?
+
+We believe we got the expected outcome, we determined if sentiment would be a good determination for determining whether to trade for a fantasy football player. However, we are a bit disappointed that they do not have a correlation.
